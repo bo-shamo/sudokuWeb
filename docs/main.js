@@ -142,6 +142,30 @@ module.exports = __webpack_require__(/*! C:\Users\danie\repos\sudokuweb\sudokuwe
 
 /***/ }),
 
+/***/ "8dq4":
+/*!********************************************!*\
+  !*** ./src/shared/checkValue.validator.ts ***!
+  \********************************************/
+/*! exports provided: CheckValue */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckValue", function() { return CheckValue; });
+function CheckValue(correctNumber) {
+    return (control) => {
+        if (control.value != undefined) {
+            if (control.value != correctNumber) {
+                return { invalidGuess: true };
+            }
+        }
+        return null;
+    };
+}
+
+
+/***/ }),
+
 /***/ "AytR":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -356,34 +380,36 @@ AppRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineI
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SudokuComponent", function() { return SudokuComponent; });
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _sudoku_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sudoku.service */ "+ij1");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _shared_checkValue_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/checkValue.validator */ "8dq4");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _sudoku_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sudoku.service */ "+ij1");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
+
 
 
 
 
 
 function SudokuComponent_div_4_div_2_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "input", 7);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](1, "input", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const j_r5 = ctx.index;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroupName", j_r5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("formGroupName", j_r5);
 } }
 function SudokuComponent_div_4_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementContainerStart"](1, 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, SudokuComponent_div_4_div_2_Template, 2, 1, "div", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementContainerEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](1, 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, SudokuComponent_div_4_div_2_Template, 2, 1, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const section_r1 = ctx.$implicit;
     const i_r2 = ctx.index;
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroupName", i_r2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", section_r1.get("section").value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("formGroupName", i_r2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", section_r1.get("section").value);
 } }
 class SudokuComponent {
     constructor(sudokuService, formBuilder) {
@@ -418,29 +444,29 @@ class SudokuComponent {
     makeSection(section) {
         const cellArray = section.map(sudokuCell => {
             return this.formBuilder.group({
-                cell: [{ value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }],
+                cell: [{ value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }, [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["Validators"].required, Object(_shared_checkValue_validator__WEBPACK_IMPORTED_MODULE_1__["CheckValue"])(sudokuCell.correctNumber)]],
                 isInitial: []
             });
         });
         return this.formBuilder.array(cellArray);
     }
 }
-SudokuComponent.ɵfac = function SudokuComponent_Factory(t) { return new (t || SudokuComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_sudoku_service__WEBPACK_IMPORTED_MODULE_2__["SudokuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormBuilder"])); };
-SudokuComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SudokuComponent, selectors: [["app-sudoku"]], decls: 5, vars: 2, consts: [[1, "grid", 3, "formGroup"], ["formArrayName", "sections"], ["class", "section", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "section", 3, "formGroupName"], ["formArrayName", "section"], ["class", "cell", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "cell", 3, "formGroupName"], ["formControlName", "cell", 1, "inputCell"]], template: function SudokuComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, "sudoku works!");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "form", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementContainerStart"](3, 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](4, SudokuComponent_div_4_Template, 3, 2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementContainerEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+SudokuComponent.ɵfac = function SudokuComponent_Factory(t) { return new (t || SudokuComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_sudoku_service__WEBPACK_IMPORTED_MODULE_3__["SudokuService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormBuilder"])); };
+SudokuComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SudokuComponent, selectors: [["app-sudoku"]], decls: 5, vars: 2, consts: [[1, "grid", 3, "formGroup"], ["formArrayName", "sections"], ["class", "section", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "section", 3, "formGroupName"], ["formArrayName", "section"], ["class", "cell", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "cell", 3, "formGroupName"], ["formControlName", "cell", 1, "inputCell"]], template: function SudokuComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1, "sudoku works!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "form", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](3, 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](4, SudokuComponent_div_4_Template, 3, 2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("formGroup", ctx.sudokuForm);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngForOf", ctx.sections.controls);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControlName"]], styles: [".grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  grid-gap: 5px;\n  max-width: 450px;\n  margin: auto;\n  background-color: #dadada;\n}\n.section[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  background-color: white;\n  align-items: center;\n}\n.cell[_ngcontent-%COMP%] {\n  text-align: center;\n  margin: 5px;\n}\n.inputCell[_ngcontent-%COMP%] {\n  text-align: center;\n  width: 25px;\n  height: 25px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1ZG9rdS5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFHQTtFQUNJLGFBQUE7RUFDQSxxQ0FBQTtFQUNBLGFBQUE7RUFDQSxnQkFBQTtFQUNBLFlBQUE7RUFDQSx5QkFBQTtBQUZKO0FBTUE7RUFDSSxhQUFBO0VBQ0EscUNBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0FBSko7QUFPQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtBQUxKO0FBUUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FBTkoiLCJmaWxlIjoic3Vkb2t1LmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiQHdpZHRoOiAyNXB4O1xuQGhlaWdodDogQHdpZHRoO1xuXG4uZ3JpZCB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IGF1dG8gYXV0byBhdXRvO1xuICAgIGdyaWQtZ2FwOiA1cHg7XG4gICAgbWF4LXdpZHRoOiA0NTBweDtcbiAgICBtYXJnaW46IGF1dG87XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2RhZGFkYTtcbiAgICBcbn1cblxuLnNlY3Rpb24ge1xuICAgIGRpc3BsYXk6IGdyaWQ7XG4gICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiBhdXRvIGF1dG8gYXV0bztcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uY2VsbHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luOiA1cHg7XG59XG5cbi5pbnB1dENlbGwge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB3aWR0aDogQHdpZHRoO1xuICAgIGhlaWdodDogQGhlaWdodDtcbn0iXX0= */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("formGroup", ctx.sudokuForm);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngForOf", ctx.sections.controls);
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormControlName"]], styles: [".grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  grid-gap: 5px;\n  max-width: 450px;\n  margin: auto;\n  background-color: #dadada;\n}\n.section[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  background-color: white;\n  align-items: center;\n}\n.cell[_ngcontent-%COMP%] {\n  text-align: center;\n  margin: 5px;\n}\n.inputCell[_ngcontent-%COMP%] {\n  text-align: center;\n  width: 25px;\n  height: 25px;\n}\ninput.ng-invalid.ng-dirty[_ngcontent-%COMP%] {\n  border-color: #a14d4d;\n  background-color: #e29f9f;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN1ZG9rdS5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFHQTtFQUNJLGFBQUE7RUFDQSxxQ0FBQTtFQUNBLGFBQUE7RUFDQSxnQkFBQTtFQUNBLFlBQUE7RUFDQSx5QkFBQTtBQUZKO0FBTUE7RUFDSSxhQUFBO0VBQ0EscUNBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0FBSko7QUFPQTtFQUNJLGtCQUFBO0VBQ0EsV0FBQTtBQUxKO0FBUUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FBTko7QUFTQTtFQUNJLHFCQUFBO0VBQ0EseUJBQUE7QUFQSiIsImZpbGUiOiJzdWRva3UuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAd2lkdGg6IDI1cHg7XG5AaGVpZ2h0OiBAd2lkdGg7XG5cbi5ncmlkIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogYXV0byBhdXRvIGF1dG87XG4gICAgZ3JpZC1nYXA6IDVweDtcbiAgICBtYXgtd2lkdGg6IDQ1MHB4O1xuICAgIG1hcmdpbjogYXV0bztcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGFkYWRhO1xuICAgIFxufVxuXG4uc2VjdGlvbiB7XG4gICAgZGlzcGxheTogZ3JpZDtcbiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IGF1dG8gYXV0byBhdXRvO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG59XG5cbi5jZWxse1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXJnaW46IDVweDtcbn1cblxuLmlucHV0Q2VsbCB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHdpZHRoOiBAd2lkdGg7XG4gICAgaGVpZ2h0OiBAaGVpZ2h0O1xufVxuXG5pbnB1dC5uZy1pbnZhbGlkLm5nLWRpcnR5IHtcbiAgICBib3JkZXItY29sb3I6ICNhMTRkNGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2UyOWY5Zjtcbn0iXX0= */"] });
 
 
 /***/ }),
