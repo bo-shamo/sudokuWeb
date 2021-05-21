@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms'
+import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms'
 
 import { Cell } from '../cell';
 import { SudokuService } from '../sudoku.service'; 
+import { CheckValue } from '../../shared/checkValue.validator';
 
 @Component({
   selector: 'app-sudoku',
@@ -48,7 +49,7 @@ export class SudokuComponent implements OnInit {
 
   makeSection(section : Cell[]) : FormArray {
     const cellArray = section.map(sudokuCell => { return this.formBuilder.group({
-        cell: [{value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }],
+        cell: [{value: sudokuCell.displayNumber, disabled: sudokuCell.isInitial }, [Validators.required, CheckValue(sudokuCell.correctNumber)]],
         isInitial: []
       }); 
     });
